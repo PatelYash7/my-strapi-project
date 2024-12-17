@@ -26,7 +26,8 @@ COPY --from=build /opt/app ./
 ENV PATH=/opt/node_modules/.bin:$PATH
 
 # Ensure proper permissions for the .env file
-RUN chown -R node:node /opt/app && chmod -R 755 /opt/app
+RUN chown -R node:node /opt/app
+RUN chmod 644 /opt/app/.env
 
 RUN chown -R node:node /opt/app
 USER node
