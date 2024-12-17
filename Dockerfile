@@ -20,14 +20,20 @@ RUN apk add --no-cache vips-dev
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/
+
+# Copy node_modules from the build stage
 COPY --from=build /opt/node_modules ./node_modules
-WORKDIR /opt/app
+
+# Copy app from the build stage
 COPY --from=build /opt/app ./
-ENV PATH=/opt/node_modules/.bin:$PATH
+
+# Ensure .env file is copied (if it exists) and permissions are set correctly
+COPY .env /opt/app/.env
 
 # Ensure proper permissions for the .env file
-RUN chown -R node:node /opt/app
-RUN chmod 644 /opt/app/.env
+RUN chown -R node:node /opt/app && chmod 644 /opt/app/.env
+
+ENV PATH=/opt/node_modules/.bin:$PATH
 
 RUN chown -R node:node /opt/app
 USER node
