@@ -25,6 +25,9 @@ WORKDIR /opt/app
 COPY --from=build /opt/app ./
 ENV PATH=/opt/node_modules/.bin:$PATH
 
+# Ensure proper permissions for the .env file
+RUN chown -R node:node /opt/app && chmod -R 755 /opt/app
+
 RUN chown -R node:node /opt/app
 USER node
 EXPOSE 1337
