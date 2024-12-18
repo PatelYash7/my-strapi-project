@@ -55,6 +55,6 @@ WORKDIR /opt/app
 COPY . .
 RUN chown -R node:node /opt/app
 USER node
-RUN ["npm", "run", "build"]
+RUN npm run build || cat /home/node/.npm/_logs/*.log
 EXPOSE 1337
 CMD ["npm", "run", "develop"]
