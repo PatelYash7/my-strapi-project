@@ -13,6 +13,7 @@ services:
       - ./yarn.lock:/opt/yarn.lock
       - ./.env:/opt/app/.env
       - ./public/uploads:/opt/app/public/uploads
+      # - my-strapi-project_strapi-data:/var/lib/postgresql/data/  # Added volume mount
     ports:
       - "1337:1337"
     networks:
@@ -32,6 +33,7 @@ services:
       POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - strapi-data:/var/lib/postgresql/data/
+      # - my-strapi-project_strapi-data:/var/lib/postgresql/data/  # Added volume mount
     ports:
       - "5432:5432"
     networks:
@@ -39,6 +41,7 @@ services:
 
 volumes:
   strapi-data:
+  # my-strapi-project_strapi-data:  # Added named volume
 
 networks:
   strapi:
