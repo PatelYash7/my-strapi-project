@@ -37,13 +37,13 @@
 
 
 # Development
-#FROM node:18-alpine3.18
-FROM node:18-alpine
+FROM node:18-alpine3.18
+# FROM node:18-alpine
 # Installing libvips-dev for sharp Compatibility
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev git
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
-ENV NODE_OPTIONS="--max_old_space_size=2048"
+ENV NODE_OPTIONS="--max_old_space_size=4096"
 
 WORKDIR /opt/
 COPY package.json package-lock.json ./
