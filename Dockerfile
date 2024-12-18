@@ -14,7 +14,7 @@ RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install --only=produc
 ENV PATH=/opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY . .
-RUN npm run build
+RUN npm run build || cat /home/node/.npm/_logs/*.log
 
 # Creating final production image
 FROM node:18-alpine
